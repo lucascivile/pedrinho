@@ -1,0 +1,47 @@
+
+<%= form_with model: @group, local: true do |form| %>
+ 
+    <% if @group.errors.any? %>
+      <div id="error_explanation">
+        <h2>
+          <%= pluralize(@group.errors.count, "error") %> prohibited
+          this group from being saved:
+        </h2>
+        <ul>
+          <% @group.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+   
+    <p>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </p>
+
+    <p>
+      <%= form.label :place %><br>
+      <%= form.text_field :place %>
+    </p>
+
+    <p>
+      <%= form.label :frequency %><br>
+      <%= form.text_field :frequency %>
+    </p>
+
+    <p>
+      <%= form.label :cost %><br>
+      <%= form.text_field :cost %>
+    </p>
+   
+    <p>
+      <%= form.label :additional_detail %><br>
+      <%= form.text_area :additional_detail %>
+    </p>
+   
+    <p>
+      <%= form.submit %>
+    </p>
+   
+  <% end %>

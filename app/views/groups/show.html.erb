@@ -1,0 +1,27 @@
+<p>
+    <strong>Name:</strong>
+    <%= @group.name %>
+</p>
+
+<p>
+    <strong>Place:</strong>
+    <%= @group.place %>
+</p>
+
+<p>
+    <strong>Frequency:</strong>
+    <%= @group.frequency %>
+</p>
+
+<p>
+    <strong>Cost:</strong>
+    <%= @group.cost %>
+</p>
+
+<p>
+    <strong>Additional detail:</strong>
+    <%= @group.additional_detail %>
+</p>
+   
+<%= link_to 'Edit', edit_group_path(@group) %> |
+<%= link_to 'Back', groups_path %>
