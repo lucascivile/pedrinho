@@ -1,6 +1,8 @@
 <h1>Listing groups</h1>
 
 <%= link_to 'New group', new_group_path %>
+<br>
+<td><%= link_to 'Add members to existing group', new_membership_path %></td>
 <br><br>
 
 <table>
@@ -29,4 +31,4 @@
   <% end %>
 </table>
 
-<%= link_to 'Back', controller: 'welcome' %>
+<%= link_to 'Back', controller: 'sessions', action: 'new' %>

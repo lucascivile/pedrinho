@@ -22,6 +22,18 @@
     <strong>Additional detail:</strong>
     <%= @group.additional_detail %>
 </p>
-   
+
+<p>
+    <strong>Members:</strong>
+</p>
+
+<ul>
+    <% Membership.all.each do |membership| %>
+        <% if membership.group_id == @group.id %>
+            <li><%= User.find_by_id(membership.user_id).email%></li>
+        <% end %>
+    <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_group_path(@group) %> |
 <%= link_to 'Back', groups_path %>
