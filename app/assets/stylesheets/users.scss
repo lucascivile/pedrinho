@@ -3,15 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "variables";
 
-.container {
-  background-color: $primary;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .form-box {
   background-color: $light;
   padding: 2.5rem;
