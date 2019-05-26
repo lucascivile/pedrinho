@@ -28,6 +28,7 @@
   border-color: $dark;
   border-width: 2px;
   margin: 0.8rem 0 0.8rem 0;
+  outline: none;
 }
 
 .login-btn {
@@ -37,4 +38,15 @@
   border-radius: 0.3rem;
   border: none;
   margin-bottom: 1rem;
+}
+
+.alert-box {
+  padding: 1rem;
+  background-color: $danger;
+  color: $light;
+  border-radius: 1rem;
+
+  p {
+    margin: 0;
+  }
 }

@@ -2,13 +2,17 @@
     <h1 class="teste">PEDRINHO</h1>
     <%= image_tag "logo.png" %>
     <h3>FOOTBALL GROUPS ADMINISTRATION</h3>
+    <% if alert != nil %>
+        <div class="alert-box">
+            <p id=”alert”><%= alert %></p>
+        </div>
+    <% end %>
     <div class="login-box">
         <% if session[:user_id] != nil %>
             <p>Already logged in</p>
             <%= link_to 'Back', controller: 'groups'%>
             <%= link_to 'Log out', controller: 'sessions', action: 'destroy' %>
         <% else %>
-            <p id=”alert”><%= alert %></p>
             <h1>Login</h1>
             <%= form_tag sessions_path do |form| %>
             <div class=”field”> 
