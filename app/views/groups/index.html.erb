@@ -7,40 +7,29 @@
 <td><%= link_to 'Add members to existing group', new_membership_path %></td>
 <br><br>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Place</th>
-    <th>Frequency</th>
-    <th>Cost</th>
-    <th>Additional detail</th>
-    <th colspan="5"></th>
-  </tr>
- 
-  <div class="box-container">
-    <% @groups.each do |group| %>
-      <div class="box">
-        <h1><%= group.name %></h1>
-          <div class="info">
-          <div class="info-line">
-            <i class="fa fa-map-marker"></i> <%= group.place %>
-          </div>
-          <div class="info-line">
-            <i class="fa fa-calendar"></i> <%= group.frequency %>
-          </div>
-          <div class="info-line">
-            <i class="fa fa-dollar"></i> <%= group.cost %>
-          </div>
+<div class="box-container">
+  <% @groups.each do |group| %>
+    <div class="box">
+      <h1><%= group.name %></h1>
+        <div class="info">
+        <div class="info-line">
+          <i class="fa fa-map-marker"></i> <%= group.place %>
         </div>
-        <p><%= group.additional_detail %></p>
-        <%= link_to 'Show', group_path(group) %>
-        <%= link_to 'Edit', edit_group_path(group) %>
-        <%= link_to 'Destroy', group_path(group),
-                method: :delete,
-                data: { confirm: 'Are you sure?' } %>
+        <div class="info-line">
+          <i class="fa fa-calendar"></i> <%= group.frequency %>
+        </div>
+        <div class="info-line">
+          <i class="fa fa-dollar"></i> <%= group.cost %>
+        </div>
       </div>
-    <% end %>
-  </div>
-</table>
+      <p><%= group.additional_detail %></p>
+      <%= link_to 'Show', group_path(group) %>
+      <%= link_to 'Edit', edit_group_path(group) %>
+      <%= link_to 'Destroy', group_path(group),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %>
+    </div>
+  <% end %>
+</div>
 
 <%= link_to 'Back', controller: 'sessions', action: 'new' %>
