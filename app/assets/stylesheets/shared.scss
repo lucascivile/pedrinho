@@ -1,0 +1,14 @@
+@import "variables";
+
+.header-container {
+  padding: 0;
+  background-color: $dark;
+  color: $light;
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  margin: 0;
+  height: 5rem;
+}
