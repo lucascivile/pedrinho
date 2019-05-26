@@ -1,3 +1,5 @@
+<%= render 'shared/header'%>
+
 <h1>Listing groups</h1>
 
 <%= link_to 'New group', new_group_path %>
@@ -15,20 +17,30 @@
     <th colspan="5"></th>
   </tr>
  
-  <% @groups.each do |group| %>
-    <tr>
-      <td><%= group.name %></td>
-      <td><%= group.place %></td>
-      <td><%= group.frequency %></td>
-      <td><%= group.cost %></td>
-      <td><%= group.additional_detail %></td>
-      <td><%= link_to 'Show', group_path(group) %></td>
-      <td><%= link_to 'Edit', edit_group_path(group) %></td>
-      <td><%= link_to 'Destroy', group_path(group),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
+  <div class="box-container">
+    <% @groups.each do |group| %>
+      <div class="box">
+        <h1><%= group.name %></h1>
+          <div class="info">
+          <div class="info-line">
+            <i class="fa fa-map-marker"></i> <%= group.place %>
+          </div>
+          <div class="info-line">
+            <i class="fa fa-calendar"></i> <%= group.frequency %>
+          </div>
+          <div class="info-line">
+            <i class="fa fa-dollar"></i> <%= group.cost %>
+          </div>
+        </div>
+        <p><%= group.additional_detail %></p>
+        <%= link_to 'Show', group_path(group) %>
+        <%= link_to 'Edit', edit_group_path(group) %>
+        <%= link_to 'Destroy', group_path(group),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+      </div>
+    <% end %>
+  </div>
 </table>
 
 <%= link_to 'Back', controller: 'sessions', action: 'new' %>
