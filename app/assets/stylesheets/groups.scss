@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "variables";
+
 .box-container {
   display: flex;
   flex-wrap: wrap;
@@ -18,4 +20,36 @@
 
 .info-line {
   margin-right: 20px;
+}
+
+.form-box {
+  background-color: $light;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  margin: 1rem;
+  -webkit-box-shadow: 10px 10px 19px -12px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 19px -12px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 19px -12px rgba(0, 0, 0, 0.75);
+  width: fit-content;
+
+  h1 {
+    margin-top: 0;
+  }
+}
+
+.input {
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  border: solid;
+  border-color: $dark;
+  border-width: 2px;
+  margin: 0.8rem 0 0.8rem 0;
+}
+
+.form-btn {
+  padding: 0.5rem;
+  background-color: $secondary;
+  color: $light;
+  border-radius: 0.3rem;
+  border: none;
 }

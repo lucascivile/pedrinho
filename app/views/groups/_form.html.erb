@@ -1,5 +1,5 @@
 
-<%= form_with model: @group, local: true do |form| %>
+<%= form_with model: @group, local: true, class: 'form-box' do |form| %>
  
     <% if @group.errors.any? %>
       <div id="error_explanation">
@@ -17,31 +17,31 @@
    
     <p>
       <%= form.label :name %><br>
-      <%= form.text_field :name %>
+      <%= form.text_field :name, class: 'input' %>
     </p>
 
     <p>
       <%= form.label :place %><br>
-      <%= form.text_field :place %>
+      <%= form.text_field :place, class: 'input' %>
     </p>
 
     <p>
       <%= form.label :frequency %><br>
-      <%= form.text_field :frequency %>
+      <%= form.text_field :frequency, class: 'input' %>
     </p>
 
     <p>
       <%= form.label :cost %><br>
-      <%= form.text_field :cost %>
+      <%= form.text_field :cost, class: 'input' %>
     </p>
    
     <p>
       <%= form.label :additional_detail %><br>
-      <%= form.text_area :additional_detail %>
+      <%= form.text_area :additional_detail, class: 'input' %>
     </p>
    
     <p>
-      <%= form.submit %>
+      <%= form.submit 'Create Group', class: 'form-btn'%>
     </p>
    
   <% end %>
