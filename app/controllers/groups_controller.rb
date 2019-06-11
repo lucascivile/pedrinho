@@ -18,8 +18,11 @@ class GroupsController < ApplicationController
 
     def create
         @group = Group.new(group_params)
+        @user = session[:user_id]
 
         if @group.save
+            @membership = Membership.new({user_id: @user, group_id: @group.id, is_admin: true, paid: false})
+            @membership.save
             redirect_to groups_path
         else
             render 'new'
@@ -38,6 +41,13 @@ class GroupsController < ApplicationController
 
     def destroy
         @group = Group.find(params[:id])
+
+        Membership.all.each do |membership|
+            if membership.group_id == @group.id
+                membership.destroy
+            end
+        end
+        
         @group.destroy
    
         redirect_to groups_path

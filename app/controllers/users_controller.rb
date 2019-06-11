@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       if @user.save
         # format.html { redirect_to @user, notice: 'User was successfully created.' }
         # format.json { render :show, status: :created, location: @user }
-        format.html { redirect_to groups_path, notice: 'User was successfully created.' }
+        format.html { redirect_to new_session_path, notice: 'User was successfully created.' }
         # redirect_to memberships_path
       else
         format.html { render :new }

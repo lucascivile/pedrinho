@@ -1,7 +1,6 @@
-<p>
-    <strong>Name:</strong>
+<h1>
     <%= @group.name %>
-</p>
+</h1>
 
 <p>
     <strong>Place:</strong>
@@ -27,6 +26,13 @@
     <strong>Members:</strong>
 </p>
 
+<% admin = false %>
+<% Membership.all.each do |membership| %>
+  <% if membership.user_id == session[:user_id] and membership.is_admin%>
+    <% admin = true %>
+  <% end %>
+<% end %>
+
 <table>
   <tr>
     <th>Email</th>
@@ -40,10 +46,24 @@
         <td><%= User.find_by_id(membership.user_id).email%></td>
         <td><%= membership.is_admin%></td>
         <td><%= membership.paid%></td>
+        <% if admin %>
+          <td><%= link_to 'Edit', edit_membership_path(membership) %></td>
+          <td><%= link_to 'Remove', membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   <% end %>
 </table>
 
-<%= link_to 'Edit', edit_group_path(@group) %> |
+<br>
+
+<% if admin %>
+  <td><%= link_to 'Add member', new_membership_path %></td>
+  <br><br>
+  <%= link_to 'Edit info', edit_group_path(@group) %> |
+  <%= link_to 'Delete', group_path(@group),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %> |
+<% end %>
+
 <%= link_to 'Back', groups_path %>

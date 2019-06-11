@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
       session[:user_email] = @user.email
       redirect_to groups_path, notice: "Logged in!"
     else
-      flash.now[:alert] = "Email or password is invalid"
+      flash.now[:alert] = "Invalid email or password"
       render "new"
     end
   end

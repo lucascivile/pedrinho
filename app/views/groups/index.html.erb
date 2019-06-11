@@ -8,28 +8,36 @@
 <br><br>
 
 <div class="box-container">
-  <% @groups.each do |group| %>
-    <div class="box">
-      <h1><%= group.name %></h1>
+
+  <% count = 0 %>
+
+  <% Membership.all.each do |membership| %>
+    <% if membership.user_id == session[:user_id] %>
+      <% group = Group.find_by_id(membership.group_id) %>
+      <% count += 1 %>
+
+      <div class="box">
+        <h1><%= group.name %></h1>
         <div class="info">
-        <div class="info-line">
-          <i class="fa fa-map-marker"></i> <%= group.place %>
+          <div class="info-line">
+            <i class="fa fa-map-marker"></i> <%= group.place %>
+          </div>
+          <div class="info-line">
+            <i class="fa fa-calendar"></i> <%= group.frequency %>
+          </div>
+          <div class="info-line">
+            <i class="fa fa-dollar"></i> <%= group.cost %>
+          </div>
         </div>
-        <div class="info-line">
-          <i class="fa fa-calendar"></i> <%= group.frequency %>
-        </div>
-        <div class="info-line">
-          <i class="fa fa-dollar"></i> <%= group.cost %>
-        </div>
+        <p><%= group.additional_detail %></p>
+        <%= link_to 'Info and actions', group_path(group) %>
       </div>
-      <p><%= group.additional_detail %></p>
-      <%= link_to 'Show', group_path(group) %>
-      <%= link_to 'Edit', edit_group_path(group) %>
-      <%= link_to 'Destroy', group_path(group),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %>
-    </div>
+    <% end %>
+  <% end %>
+
+  <% if count == 0%>
+    <p> You do not belong to any group yet. Create your own! </p>
   <% end %>
 </div>
 
-<%= link_to 'Back', controller: 'sessions', action: 'new' %>
+<%= link_to 'Log out', controller: 'sessions', action: 'destroy' %>
