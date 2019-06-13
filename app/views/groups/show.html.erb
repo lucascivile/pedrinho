@@ -8,8 +8,8 @@
 </p>
 
 <p>
-    <strong>Frequency:</strong>
-    <%= @group.frequency %>
+    <strong>Dates and times:</strong>
+    <%= @group.date_time %>
 </p>
 
 <p>
@@ -35,7 +35,7 @@
 
 <table>
   <tr>
-    <th>Email</th>
+    <th>Username</th>
     <th>Admin</th>
     <th>Paid</th>
   </tr>
@@ -43,7 +43,7 @@
   <% Membership.all.each do |membership| %>
     <% if membership.group_id == @group.id %>
       <tr>
-        <td><%= User.find_by_id(membership.user_id).email%></td>
+        <td><%= User.find_by_id(membership.user_id).username%></td>
         <td><%= membership.is_admin%></td>
         <td><%= membership.paid%></td>
         <% if admin %>
@@ -58,12 +58,13 @@
 <br>
 
 <% if admin %>
-  <td><%= link_to 'Add member', new_membership_path %></td>
+  <td><%= link_to 'Add member', new_membership_path(:group_ref => @group.id) %></td>
   <br><br>
   <%= link_to 'Edit info', edit_group_path(@group) %> |
   <%= link_to 'Delete', group_path(@group),
               method: :delete,
-              data: { confirm: 'Are you sure?' } %> |
+              data: { confirm: 'Are you sure?' } %>
+  <br><br>
 <% end %>
 
 <%= link_to 'Back', groups_path %>

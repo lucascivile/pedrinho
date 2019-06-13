@@ -1,7 +1,7 @@
 <% user = User.find_by_id(@membership.user_id) %>
 <% group = Group.find_by_id(@membership.group_id) %>
 
-<h1>User <%=user.email%> in group <%=group.name%></h1>
+<h1>User <%=user.username%> in group <%=group.name%></h1>
 
 <%= form_with(model: @membership, local: true) do |form| %>
   <% if @membership.errors.any? %>
@@ -32,4 +32,4 @@
 <% end %>
 
 <%= link_to 'Show', @membership %> |
-<%= link_to 'Back', memberships_path %>
+<%= link_to 'Back', groups_path %>

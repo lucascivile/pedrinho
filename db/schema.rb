@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_21_203418) do
+ActiveRecord::Schema.define(version: 2019_06_13_190314) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "place"
-    t.string "frequency"
+    t.string "date_time"
     t.float "cost"
     t.text "additional_detail"
   end
@@ -34,11 +34,11 @@ ActiveRecord::Schema.define(version: 2019_05_21_203418) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
+    t.string "username"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end

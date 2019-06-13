@@ -3,20 +3,20 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by_email(params[:email])
+    @user = User.find_by_username(params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      session[:user_email] = @user.email
-      redirect_to groups_path, notice: "Logged in!"
+      session[:user_username] = @user.username
+      redirect_to groups_path
     else
-      flash.now[:alert] = "Invalid email or password"
+      flash.now[:alert] = "Invalid username or password"
       render "new"
     end
   end
 
   def destroy
     session[:user_id] = nil
-    session[:user_email] = nil
+    session[:user_username] = nil
     redirect_to root_url, notice: "Logged out!"
   end
 end
