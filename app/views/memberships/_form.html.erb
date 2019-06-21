@@ -18,7 +18,17 @@
 
   <div class="field">
     <%= form.label :user_id %><br />
-    <%= form.select :user_id, options_for_select(User.all.map{|s|[s.username, s.id]}) %>
+    <% valid_users = [] %>
+    <% Membership.all.each do |membership| %>
+      <% if membership.group_id.to_i != group_ref.to_i %>
+        <% valid_users.push(User.find(membership.user_id)) %>
+      <% end %>
+    <% end %>
+    <% if valid_users.length > 0 %>
+      <%= form.select :user_id, options_for_select(valid_users.map{|s|[s.username, s.id]}) %>
+    <% else %>
+      <p><strong>No users found to add!</strong></p>
+    <% end %>
   </div>
 
   <div class="field">
