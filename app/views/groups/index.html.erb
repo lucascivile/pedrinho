@@ -1,8 +1,10 @@
 <%= render 'shared/header'%>
 
-<h1>Listing groups</h1>
+<h1>Meus Times</h1>
 
-<%= link_to 'New group', new_group_path %>
+<div class="btn">
+    <i class="fa fa-plus"> </i><%= link_to 'New group', new_group_path, class: "link" %>
+</div>
 
 <div class="box-container">
 
@@ -37,4 +39,7 @@
   <% end %>
 </div>
 
-<%= link_to 'Log out', controller: 'sessions', action: 'destroy' %>
+<div class="btn">
+    <i class="fa fa-reply"></i>
+    <%= link_to 'Log out', class: "link", controller: 'sessions', action: 'destroy' %>
+</div>
