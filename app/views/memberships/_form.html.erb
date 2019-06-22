@@ -19,9 +19,15 @@
   <div class="field">
     <%= form.label :user_id %><br />
     <% valid_users = [] %>
-    <% Membership.all.each do |membership| %>
-      <% if membership.group_id.to_i != group_ref.to_i %>
-        <% valid_users.push(User.find(membership.user_id)) %>
+    <% User.all.each do |user| %>
+      <% add = true %>
+      <% Membership.all.each do |membership| %>
+        <% if membership.group_id.to_i == group_ref.to_i and membership.user_id.to_i == user.id.to_i %>
+          <% add = false %>
+        <% end %>
+      <% end %>
+      <% if add %>
+          <% valid_users.push(user) %>
       <% end %>
     <% end %>
     <% if valid_users.length > 0 %>
