@@ -21,7 +21,7 @@ class GroupsController < ApplicationController
         @user = session[:user_id]
 
         if @group.save
-            @membership = Membership.new({user_id: @user.id, group_id: @group.id, is_admin: true, paid: false})
+            @membership = Membership.new({user_id: @user, group_id: @group.id, is_admin: true, paid: false})
             @membership.save
             redirect_to groups_path
         else
