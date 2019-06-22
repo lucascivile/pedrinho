@@ -1,30 +1,20 @@
-<h1>
-    <%= @group.name %>
-</h1>
+<%= render 'shared/header'%>
 
-<p>
-    <strong>Place:</strong>
-    <%= @group.place %>
-</p>
-
-<p>
-    <strong>Dates and times:</strong>
-    <%= @group.date_time %>
-</p>
-
-<p>
-    <strong>Cost:</strong>
-    <%= @group.cost %>
-</p>
-
-<p>
-    <strong>Additional detail:</strong>
-    <%= @group.additional_detail %>
-</p>
-
-<p>
-    <strong>Members:</strong>
-</p>
+<h1><%= @group.name %></h1>
+<div style="margin: 1rem">
+  <div class="info">
+    <div class="info-line">
+      <i class="fa fa-map-marker"></i> <%= @group.place %>
+    </div>
+    <div class="info-line">
+      <i class="fa fa-calendar"></i> <%= @group.date_time %>
+    </div>
+    <div class="info-line">
+      <i class="fa fa-dollar"></i> <%= @group.cost %>
+    </div>
+  </div>
+  <p><%= @group.additional_detail %></p>
+</div>
 
 <% admin = false %>
 <% Membership.all.each do |membership| %>
@@ -33,32 +23,63 @@
   <% end %>
 <% end %>
 
-<table>
-  <tr>
-    <th>Username</th>
-    <th>Admin</th>
-    <th>Paid</th>
-  </tr>
- 
-  <% Membership.all.each do |membership| %>
-    <% if membership.group_id == @group.id %>
-      <tr>
-        <td><%= User.find_by_id(membership.user_id).username%></td>
-        <td><%= membership.is_admin%></td>
-        <td><%= membership.paid%></td>
+<div class="players-list">
+
+
+<div class="player">
+  <div class="player-info">
+    <div class="player-name">
+      <h3>Nome</h3>
+    </div>
+    <div class="player-admin">
+      <h3>Administrador</h3>
+    </div>
+    <div class="player-paid">
+      <h3>Pago</h3>
+    </div>
+  </div>
+  <div class="players-options">
+    
+  </div>
+</div>
+
+<% Membership.all.each do |membership| %>
+  <% if membership.group_id == @group.id %>
+    
+    <div class="player">
+      <div class="player-info">
+        <div class="player-name">
+          <%= User.find_by_id(membership.user_id).username %>
+        </div>
+        <div class="player-admin">
+          <% if membership.is_admin %>
+            ok
+          <% end %>
+        </div>
+        <div class="player-paid">
+          <% if membership.paid %>
+            ok
+          <% end %>
+        </div>
+      </div>
+      <div class="players-options">
         <% if admin %>
-          <td><%= link_to 'Edit', edit_membership_path(membership) %></td>
-          <td><%= link_to 'Remove', membership, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%= link_to 'Edit', edit_membership_path(membership) %>
+          <%= link_to 'Remove', membership, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
-      </tr>
-    <% end %>
+      </div>
+    </div>
   <% end %>
-</table>
+<% end %>
+</div>
 
 <br>
 
 <% if admin %>
-  <td><%= link_to 'Add member', new_membership_path(:group_ref => @group.id) %></td>
+  <div class="btn">
+    <i class="fa fa-plus"> </i>
+    <%= link_to 'Add member', new_membership_path(:group_ref => @group.id), class: "link" %>
+  </div>
   <br><br>
   <%= link_to 'Edit info', edit_group_path(@group) %> |
   <%= link_to 'Delete', group_path(@group),
