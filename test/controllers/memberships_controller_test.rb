@@ -3,46 +3,32 @@ require 'test_helper'
 class MembershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @membership = memberships(:one)
+    @group = groups(:one)
+    @user = users(:one)
   end
 
-  test "should get index" do
-    get memberships_url
-    assert_response :success
+  test "should save" do 
+    membership = Membership.new({ is_admin: @membership.is_admin, paid: @membership.paid, user_id: @user.id, group_id: @group.id})
+    assert membership.save
   end
 
-  test "should get new" do
-    get new_membership_url
-    assert_response :success
+  test "should destroy" do
+    membership = Membership.new({ is_admin: @membership.is_admin, paid: @membership.paid, user_id: @user.id, group_id: @group.id})
+    assert membership.save
+
+    old_id = membership.id
+    membership.destroy
+
+    assert_nil Membership.find_by_id(old_id)
   end
 
-  test "should create membership" do
-    assert_difference('Membership.count') do
-      post memberships_url, params: { membership: { is_admin: @membership.is_admin, paid: @membership.paid } }
-    end
-
-    assert_redirected_to membership_url(Membership.last)
+  test "should not save membership without user_id" do
+    membership = Membership.new({ is_admin: @membership.is_admin, paid: @membership.paid, user_id: @user.id})
+    assert !membership.save
   end
 
-  test "should show membership" do
-    get membership_url(@membership)
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get edit_membership_url(@membership)
-    assert_response :success
-  end
-
-  test "should update membership" do
-    patch membership_url(@membership), params: { membership: { is_admin: @membership.is_admin, paid: @membership.paid } }
-    assert_redirected_to membership_url(@membership)
-  end
-
-  test "should destroy membership" do
-    assert_difference('Membership.count', -1) do
-      delete membership_url(@membership)
-    end
-
-    assert_redirected_to memberships_url
+  test "should not save membership without group_id" do
+    membership = Membership.new({ is_admin: @membership.is_admin, paid: @membership.paid, group_id: @group.id})
+    assert !membership.save
   end
 end

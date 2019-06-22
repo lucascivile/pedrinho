@@ -2,8 +2,14 @@
 
 one:
   name: MyString
-  member: MyString
+  place: MyString
+  date_time: MyString
+  cost: 10.0
+  additional_detail: MyString
 
 two:
   name: MyString
-  member: MyString
+  place: MyString
+  date_time: MyString
+  cost: 10.0
+  additional_detail: MyString
