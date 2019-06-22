@@ -18,7 +18,7 @@
 
 <% admin = false %>
 <% Membership.all.each do |membership| %>
-  <% if membership.user_id == session[:user_id] and membership.is_admin%>
+  <% if membership.user_id == session[:user_id] and membership.group_id == @group.id and membership.is_admin%>
     <% admin = true %>
   <% end %>
 <% end %>
@@ -29,13 +29,13 @@
 <div class="player">
   <div class="player-info">
     <div class="player-name">
-      <h3>Nome</h3>
+      <h3>Name</h3>
     </div>
     <div class="player-admin">
-      <h3>Administrador</h3>
+      <h3>Administrator</h3>
     </div>
     <div class="player-paid">
-      <h3>Pago</h3>
+      <h3>Monthly fees paid</h3>
     </div>
   </div>
   <div class="players-options">
@@ -53,17 +53,21 @@
         </div>
         <div class="player-admin">
           <% if membership.is_admin %>
-            ok
+            yes
+          <% else %>
+            no
           <% end %>
         </div>
         <div class="player-paid">
           <% if membership.paid %>
-            ok
+            yes
+          <% else %>
+            no
           <% end %>
         </div>
       </div>
       <div class="players-options">
-        <% if admin %>
+        <% if admin == true %>
           <%= link_to 'Edit', edit_membership_path(membership) %>
           <%= link_to 'Remove', membership, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
@@ -75,7 +79,7 @@
 
 <br>
 
-<% if admin %>
+<% if admin == true %>
   <div class="btn">
     <i class="fa fa-plus"> </i>
     <%= link_to 'Add member', new_membership_path(:group_ref => @group.id), class: "link" %>
